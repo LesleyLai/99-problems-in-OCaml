@@ -9,3 +9,13 @@ let rec last (lst: 'a list) =
   | [] -> None
   | [x] -> Some x
   | _ :: tl -> last tl
+
+(*
+Problem 2
+Find the last but one (last and penultimate) elements of a list. (easy)
+*)
+let rec last_two (lst: 'a list) =
+  match lst with
+  | [] | [_] -> None
+  | lst' :: lst :: [] -> Some (lst', lst)
+  | _ :: tl -> last_two tl
