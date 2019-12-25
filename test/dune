@@ -1,0 +1,11 @@
+(executable
+ (name run_tests)
+ (libraries
+   ounit2
+   listProblems
+))
+
+; (alias
+;  (name runtest)
+;  (deps run_tests.exe)
+;  (action (run %{deps} -q --color=always)))
