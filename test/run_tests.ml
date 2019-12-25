@@ -18,6 +18,11 @@ let tests = "test suite for list problems" >::: [
   "length multi"  >:: (fun _ -> assert_equal 4 (length ["a"; "b"; "c"; "d"]));
 
   "rev multi"  >:: (fun _ -> assert_equal ["c"; "b"; "a"] (rev ["a"; "b"; "c"]));
+
+  "palindrome empty"  >:: (fun _ -> assert_equal true (is_palindrome []));
+  "palindrome yes"  >:: (fun _ -> assert_equal true (is_palindrome ["x" ; "a" ; "m" ; "a" ; "x"]));
+  "palindrome no"  >:: (fun _ -> assert_equal false (is_palindrome ["a" ; "b"]));
+
 ]
 
 let _ = run_test_tt_main tests

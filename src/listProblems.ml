@@ -58,3 +58,9 @@ let rev (lst: 'a list) =
     | hd :: tl -> helper tl (hd :: acc)
   in
   helper lst []
+
+(*
+6. Find out whether a list is a palindrome.
+*)
+let is_palindrome (lst: 'a list) =
+  lst = rev lst
