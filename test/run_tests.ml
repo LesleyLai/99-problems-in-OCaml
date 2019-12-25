@@ -13,6 +13,9 @@ let tests = "test suite for list problems" >::: [
   "at negative"  >:: (fun _ -> assert_equal None (at (-1) ["a"]));
   "at big"  >:: (fun _ -> assert_equal None (at 3 ["a"]));
   "at hit"  >:: (fun _ -> assert_equal (Some "d") (at 3 ["a"; "b"; "c"; "d"; "e" ]));
+
+  "length empty"  >:: (fun _ -> assert_equal 0 (length []));
+  "length multi"  >:: (fun _ -> assert_equal 4 (length ["a"; "b"; "c"; "d"]));
 ]
 
 let _ = run_test_tt_main tests

@@ -36,3 +36,15 @@ let rec at (n: int) (lst: 'a list) =
         Some hd
       else
         at (n-1) tl
+
+(*
+4. Find the number of elements of a list. (easy)
+*)
+let length (lst: 'a list) =
+  let rec helper lst' acc =
+    match lst' with
+    | [] -> acc
+    | _ :: tl -> helper tl (acc + 1)
+  in
+  helper lst 0
+
