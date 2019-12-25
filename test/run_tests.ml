@@ -16,6 +16,8 @@ let tests = "test suite for list problems" >::: [
 
   "length empty"  >:: (fun _ -> assert_equal 0 (length []));
   "length multi"  >:: (fun _ -> assert_equal 4 (length ["a"; "b"; "c"; "d"]));
+
+  "rev multi"  >:: (fun _ -> assert_equal ["c"; "b"; "a"] (rev ["a"; "b"; "c"]));
 ]
 
 let _ = run_test_tt_main tests

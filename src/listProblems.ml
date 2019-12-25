@@ -48,3 +48,13 @@ let length (lst: 'a list) =
   in
   helper lst 0
 
+(*
+5. Reverse a list. (easy)
+*)
+let rev (lst: 'a list) =
+  let rec helper lst' acc =
+    match lst' with
+    | [] -> acc
+    | hd :: tl -> helper tl (hd :: acc)
+  in
+  helper lst []
