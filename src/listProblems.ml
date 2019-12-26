@@ -64,3 +64,33 @@ let rev (lst: 'a list) =
 *)
 let is_palindrome (lst: 'a list) =
   lst = rev lst
+
+(*
+7. Flatten a nested list structure
+*)
+
+(* There is no nested list type in OCaml, so we need to define one
+     first. A node of a nested list is either an element, or a list of
+     nodes. *)
+type 'a node =
+  | One of 'a
+  | Many of 'a node list
+
+(* My solution use CPS to achieve tail recursion *)
+(* let flatten list =
+ *   let rec helper acc = function
+ *     | [] -> acc
+ *     | One x :: t -> helper (x :: acc) t
+ *     | Many l :: t -> helper (helper acc l) t in
+ *   List.rev (helper [] list) *)
+
+let flatten list =
+  let rec helper_k acc lst k =
+    match lst with
+    | [] -> k(acc)
+    | One x :: t -> helper_k (x :: acc) t k
+    | Many l :: t ->
+      helper_k acc l (fun v1 ->
+          helper_k v1 t (fun v2 -> k(v2))
+      ) in
+  List.rev (helper_k [] list (fun x -> x))

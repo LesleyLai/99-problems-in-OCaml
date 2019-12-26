@@ -23,6 +23,8 @@ let tests = "test suite for list problems" >::: [
   "palindrome yes"  >:: (fun _ -> assert_equal true (is_palindrome ["x" ; "a" ; "m" ; "a" ; "x"]));
   "palindrome no"  >:: (fun _ -> assert_equal false (is_palindrome ["a" ; "b"]));
 
+  "flatten"  >:: (fun _ -> assert_equal ["a"; "b"; "c"; "d"; "e"]
+                      (flatten [ One "a"; Many [ One "b" ; Many [ One "c" ; One "d" ] ; One "e" ] ]));
 ]
 
 let _ = run_test_tt_main tests
