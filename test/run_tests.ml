@@ -36,6 +36,15 @@ let tests = "test suite for list problems" >::: [
                                   "b";"c";"c";"a";
                                   "a";"d";"d";"e";
                                   "e";"e";"e"]));
+
+  "runlength encoding" >:: (fun _ -> assert_equal
+                               [(4, "a"); (1, "b"); (2, "c"); (2, "a");
+                                (2, "d"); (4, "e")]
+                              (runlength_encode
+                                 ["a";"a";"a";"a";
+                                  "b";"c";"c";"a";
+                                  "a";"d";"d";"e";
+                                  "e";"e";"e"]));
 ]
 
 let _ = run_test_tt_main tests

@@ -96,7 +96,7 @@ let flatten list =
   List.rev (helper_k [] list (fun x -> x))
 
 (*
-8. Pack consecutive duplicates of list elements into sublists.
+9. Pack consecutive duplicates of list elements into sublists.
 *)
 let pack (list: 'a list): 'a list list =
   let rec helper acc current = function
@@ -107,3 +107,15 @@ let pack (list: 'a list): 'a list list =
       if elem1 = elem2 then helper acc new_current tail
       else helper (new_current::acc) [] tail in
   helper [] [] list |> rev
+
+(*
+10. Run-length encoding of a list. (easy)
+*)
+let runlength_encode (list: 'a list): (int * 'a) list =
+  let rec helper acc count = function
+    | [] -> acc
+    | [elem] -> (count+1, elem)::acc
+    | elem1 :: ((elem2 :: _) as tail) ->
+      if elem1 = elem2 then helper acc (count+1) tail
+      else helper ((count+1, elem1)::acc) 0 tail in
+  helper [] 0 list |> rev
