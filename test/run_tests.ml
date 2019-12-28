@@ -26,6 +26,14 @@ let tests = "test suite for list problems" >::: [
   "flatten"  >:: (fun _ -> assert_equal ["a"; "b"; "c"; "d"; "e"]
                      (flatten [ One "a"; Many [ One "b" ; Many [ One "c" ; One "d" ] ; One "e" ] ]));
 
+  "unique"  >:: (fun _ -> assert_equal
+                              ["a"; "b"; "c"; "a"; "d"; "e"]
+                              (unique
+                                 ["a";"a";"a";"a";
+                                  "b";"c";"c";"a";
+                                  "a";"d";"d";"e";
+                                  "e";"e";"e"]));
+
   "pack"  >:: (fun _ -> assert_equal
                               [["a"; "a"; "a"; "a"];
                                ["b"]; ["c"; "c"];

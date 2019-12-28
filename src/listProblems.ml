@@ -96,6 +96,19 @@ let flatten list =
   List.rev (helper_k [] list (fun x -> x))
 
 (*
+8. Eliminate consecutive duplicates of list elements. (medium)
+*)
+let unique (list: 'a list): 'a list =
+  let rec helper acc = function
+    | elem1 :: ((elem2 :: _) as tail) ->
+      if elem1 = elem2 then helper acc tail
+      else helper (elem1 :: acc) tail
+    | [elem] -> elem::acc
+    | [] -> acc in
+  helper [] list |> rev
+
+
+(*
 9. Pack consecutive duplicates of list elements into sublists.
 *)
 let pack (list: 'a list): 'a list list =
