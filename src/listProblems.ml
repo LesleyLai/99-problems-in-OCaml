@@ -152,3 +152,18 @@ let runlength_encode' (list: 'a list): 'a code list =
       if elem1 = elem2 then helper acc (count+1) tail
       else helper ((from_tuple(count+1, elem1))::acc) 0 tail in
   helper [] 0 list |> rev
+
+let rec duplicate (elem: 'a) (count: int) (acc: 'a list): 'a list =
+  if count = 0 then acc
+  else duplicate elem (count - 1) (elem :: acc)
+
+(*
+12. Decode a run-length encoded list. (medium)
+*)
+let runlength_decode (code: 'a code list): 'a list =
+  let rec helper acc = function
+    | [] -> acc
+    | (OneCode x) :: tl -> helper (x :: acc) tl
+    | (ManyCodes (n, x)) :: tl -> helper (duplicate x n acc) tl
+  in
+  helper [] code |> rev

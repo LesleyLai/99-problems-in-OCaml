@@ -1,6 +1,11 @@
 open OUnit2
 open ListProblems
 
+let to_encode = ["a";"a";"a";"a";
+                 "b";"c";"c";"a";
+                 "a";"d";"d";"e";
+                 "e";"e";"e"]
+
 let tests = "test suite for list problems" >::: [
   "last empty"  >:: (fun _ -> assert_equal None (last []));
   "last multi"    >:: (fun _ -> assert_equal (Some "d") (last ["a" ; "b" ; "c" ; "d"]));
@@ -39,20 +44,12 @@ let tests = "test suite for list problems" >::: [
                                ["b"]; ["c"; "c"];
                                ["a"; "a"]; ["d"; "d"];
                                ["e"; "e"; "e"; "e"]]
-                              (pack
-                                 ["a";"a";"a";"a";
-                                  "b";"c";"c";"a";
-                                  "a";"d";"d";"e";
-                                  "e";"e";"e"]));
+                              (pack to_encode));
 
   "runlength encoding" >:: (fun _ -> assert_equal
                                [(4, "a"); (1, "b"); (2, "c"); (2, "a");
                                 (2, "d"); (4, "e")]
-                              (runlength_encode
-                                 ["a";"a";"a";"a";
-                                  "b";"c";"c";"a";
-                                  "a";"d";"d";"e";
-                                  "e";"e";"e"]));
+                              (runlength_encode to_encode));
 
   "modified runlength encoding" >:: (fun _ -> assert_equal
                                         [ManyCodes (4, "a");
@@ -61,11 +58,11 @@ let tests = "test suite for list problems" >::: [
                                          ManyCodes (2, "a");
                                          ManyCodes (2, "d");
                                          ManyCodes (4, "e")]
-                              (runlength_encode'
-                                 ["a";"a";"a";"a";
-                                  "b";"c";"c";"a";
-                                  "a";"d";"d";"e";
-                                  "e";"e";"e"]));
+                              (runlength_encode' to_encode));
+
+  "decode  runlength encoding" >:: (fun _ -> assert_equal to_encode
+                                       ((runlength_encode' to_encode)
+                                        |> runlength_decode));
 ]
 
 let _ = run_test_tt_main tests
