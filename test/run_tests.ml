@@ -53,6 +53,19 @@ let tests = "test suite for list problems" >::: [
                                   "b";"c";"c";"a";
                                   "a";"d";"d";"e";
                                   "e";"e";"e"]));
+
+  "modified runlength encoding" >:: (fun _ -> assert_equal
+                                        [ManyCodes (4, "a");
+                                         OneCode "b";
+                                         ManyCodes (2, "c");
+                                         ManyCodes (2, "a");
+                                         ManyCodes (2, "d");
+                                         ManyCodes (4, "e")]
+                              (runlength_encode'
+                                 ["a";"a";"a";"a";
+                                  "b";"c";"c";"a";
+                                  "a";"d";"d";"e";
+                                  "e";"e";"e"]));
 ]
 
 let _ = run_test_tt_main tests

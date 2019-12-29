@@ -132,3 +132,23 @@ let runlength_encode (list: 'a list): (int * 'a) list =
       if elem1 = elem2 then helper acc (count+1) tail
       else helper ((count+1, elem1)::acc) 0 tail in
   helper [] 0 list |> rev
+
+(*
+11. Modified run-length encoding. (easy)
+*)
+type 'a code =
+    | OneCode of 'a
+    | ManyCodes of int * 'a
+
+let runlength_encode' (list: 'a list): 'a code list =
+  let from_tuple (count, elem) =
+    if count = 1 then OneCode elem
+    else ManyCodes (count, elem)
+  in
+  let rec helper acc count = function
+    | [] -> acc
+    | [elem] -> (from_tuple(count+1, elem))::acc
+    | elem1 :: ((elem2 :: _) as tail) ->
+      if elem1 = elem2 then helper acc (count+1) tail
+      else helper ((from_tuple(count+1, elem1))::acc) 0 tail in
+  helper [] 0 list |> rev
