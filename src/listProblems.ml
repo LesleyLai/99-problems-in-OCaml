@@ -192,6 +192,6 @@ let replicate (lst: 'a list) (count: int): 'a list =
   let rec helper acc = function
     | [] -> acc
     | hd :: tl ->
-      add_duplicate (helper acc tl) count hd
+      helper (add_duplicate acc count hd) tl
   in
-  helper [] lst
+  helper [] lst |> rev
