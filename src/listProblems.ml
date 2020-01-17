@@ -167,3 +167,13 @@ let runlength_decode (code: 'a code list): 'a list =
     | (ManyCodes (n, x)) :: tl -> helper (duplicate x n acc) tl
   in
   helper [] code |> rev
+
+(*
+14. Duplicate the elements of a list. (easy)
+*)
+let duplicate (lst: 'a list): 'a list =
+  let rec helper acc = function
+    | [] -> acc
+    | hd :: tl -> helper (hd :: hd :: acc) tl
+  in
+  helper [] lst |> rev

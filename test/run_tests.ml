@@ -63,6 +63,10 @@ let tests = "test suite for list problems" >::: [
   "decode  runlength encoding" >:: (fun _ -> assert_equal to_encode
                                        ((runlength_encode' to_encode)
                                         |> runlength_decode));
+
+  "duplicate" >:: (fun _ -> assert_equal
+                      (duplicate ["a";"b";"c";"c";"d"])
+                  ["a"; "a"; "b"; "b"; "c"; "c"; "c"; "c"; "d"; "d"]);
 ]
 
 let _ = run_test_tt_main tests
