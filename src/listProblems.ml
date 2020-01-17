@@ -177,3 +177,21 @@ let duplicate (lst: 'a list): 'a list =
     | hd :: tl -> helper (hd :: hd :: acc) tl
   in
   helper [] lst |> rev
+
+
+(*
+15. Replicate the elements of a list a given number of times. (medium)
+*)
+let rec add_duplicate (lst: 'a list) (count: int) (elem: 'a): 'a list =
+  if count = 0 then
+    lst
+  else
+    add_duplicate (elem :: lst) (count - 1) elem
+
+let replicate (lst: 'a list) (count: int): 'a list =
+  let rec helper acc = function
+    | [] -> acc
+    | hd :: tl ->
+      add_duplicate (helper acc tl) count hd
+  in
+  helper [] lst
