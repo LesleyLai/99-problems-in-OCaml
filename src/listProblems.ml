@@ -209,3 +209,17 @@ let drop (lst: 'a list) (num: int): 'a list =
         helper (hd :: acc) (num' - 1) tl
   in
   helper [] num lst |> rev
+
+(*
+17. Split a list into two parts; the length of the first part is given. (easy)
+*)
+let split (lst: 'a list) (num: int): 'a list * 'a list =
+  let rec helper acc num' = function
+    | [] -> (acc |> rev, [])
+    | hd :: tl as lst' ->
+      if num' = 0 then
+        (acc |> rev, lst')
+      else
+        helper (hd :: acc) (num' - 1) tl
+  in
+  helper [] num lst

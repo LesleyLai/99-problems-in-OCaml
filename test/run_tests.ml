@@ -76,7 +76,17 @@ let tests = "test suite for list problems" >::: [
   "drop" >:: (fun _ -> assert_equal
                  (drop ["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"] 3)
                  ["a"; "b"; "d"; "e"; "g"; "h"; "j"]
-             )
+             );
+
+  "split" >:: (fun _ -> assert_equal
+                 (split ["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"] 3)
+                 (["a"; "b"; "c"], ["d"; "e"; "f"; "g"; "h"; "i"; "j"])
+              );
+
+  "split short" >:: (fun _ -> assert_equal
+                 (split ["a";"b";"c";"d"] 5)
+                 (["a"; "b"; "c"; "d"], [])
+             );
 ]
 
 let _ = run_test_tt_main tests
