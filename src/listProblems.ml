@@ -195,3 +195,17 @@ let replicate (lst: 'a list) (count: int): 'a list =
       helper (add_duplicate acc count hd) tl
   in
   helper [] lst |> rev
+
+(*
+16. Drop every N'th element from a list. (medium)
+*)
+let drop (lst: 'a list) (num: int): 'a list =
+  let rec helper acc num' = function
+    | [] -> acc
+    | hd :: tl ->
+      if num' = 1 then
+        helper acc num tl
+      else
+        helper (hd :: acc) (num' - 1) tl
+  in
+  helper [] num lst |> rev

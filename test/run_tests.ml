@@ -71,7 +71,12 @@ let tests = "test suite for list problems" >::: [
 
   "replicate" >:: (fun _ -> assert_equal
                       (replicate ["a";"b";"c"] 3)
-                  ["a"; "a"; "a"; "b"; "b"; "b"; "c"; "c"; "c"]);
+                      ["a"; "a"; "a"; "b"; "b"; "b"; "c"; "c"; "c"]);
+
+  "drop" >:: (fun _ -> assert_equal
+                 (drop ["a";"b";"c";"d";"e";"f";"g";"h";"i";"j"] 3)
+                 ["a"; "b"; "d"; "e"; "g"; "h"; "j"]
+             )
 ]
 
 let _ = run_test_tt_main tests
